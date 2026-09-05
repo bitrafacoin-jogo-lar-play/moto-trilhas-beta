@@ -1,0 +1,144 @@
+:root {
+  color-scheme: light;
+  font-family: ui-rounded, "Arial Rounded MT Bold", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ink: #17352c;
+  --muted: #60756d;
+  --panel: #fffdf7;
+  --panel-soft: #f7f6ef;
+  --line: #d7e0da;
+  --accent: #1d7a59;
+  --accent-dark: #155840;
+  --warm: #f4bd4f;
+  --danger: #9c483c;
+}
+* { box-sizing: border-box; }
+html { min-width: 320px; }
+body { margin: 0; background: #f2f0e7; color: var(--ink); }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+.page { width: min(1160px, 100%); margin: 0 auto; padding: 18px; }
+.hidden { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* Entrada */
+.join-shell { display: grid; grid-template-columns: 1.1fr .9fr; min-height: 620px; margin-top: 24px; border-radius: 30px; overflow: hidden; border: 2px solid var(--line); background: var(--panel); }
+.hero-visual { position: relative; overflow: hidden; min-height: 520px; background: linear-gradient(#dff5ff 0 54%, #87bd73 54% 100%); }
+.sun { position: absolute; width: 92px; height: 92px; border-radius: 50%; background: #f7ce63; right: 13%; top: 12%; }
+.mountain { position: absolute; bottom: 37%; width: 0; height: 0; border-left: 210px solid transparent; border-right: 210px solid transparent; border-bottom: 230px solid #71977e; }
+.m1 { left: -110px; }
+.m2 { right: -170px; transform: scale(.82); border-bottom-color: #5d826d; }
+.trail { position: absolute; left: -12%; right: -12%; bottom: 2%; height: 42%; background: #b98250; clip-path: polygon(10% 100%, 90% 100%, 64% 0, 44% 0); }
+.hero-bike { position: absolute; left: 50%; bottom: 19%; transform: translateX(-50%) rotate(-6deg); font-size: clamp(68px, 10vw, 118px); filter: drop-shadow(0 10px 0 #0002); }
+.join-card { align-self: center; padding: clamp(28px, 5vw, 58px); }
+.eyebrow { margin: 0 0 10px; color: var(--accent); font-size: 12px; font-weight: 900; letter-spacing: .13em; }
+h1 { margin: 0; font-size: clamp(42px, 7vw, 68px); line-height: .95; }
+.lead { margin: 20px 0 28px; color: var(--muted); font-size: 18px; line-height: 1.5; }
+.join-card form { display: grid; gap: 10px; }
+label { font-weight: 900; }
+input { width: 100%; min-height: 54px; padding: 0 16px; border: 2px solid var(--line); border-radius: 15px; background: white; color: var(--ink); font-size: 18px; }
+input:focus, button:focus-visible, canvas:focus-visible { outline: 4px solid #f4bd4f80; outline-offset: 2px; }
+.primary { min-height: 56px; border: 0; border-radius: 15px; background: var(--accent); color: white; font-weight: 900; font-size: 18px; }
+.primary:hover { background: var(--accent-dark); }
+.privacy-note { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.message { min-height: 1.3em; margin: 0; color: var(--danger); font-size: 13px; font-weight: 800; }
+
+/* Jogo */
+.game-panel { position: relative; display: grid; gap: 12px; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand-compact { display: flex; align-items: center; gap: 8px; font-size: 18px; }
+.brand-compact span { font-size: 28px; }
+.top-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 7px; }
+.room-badge, .icon-button { min-height: 42px; border: 2px solid var(--line); border-radius: 13px; background: var(--panel); color: var(--ink); padding: 0 12px; font-size: 13px; font-weight: 900; }
+.room-badge { display: inline-flex; align-items: center; }
+.icon-button:hover { border-color: #aebfb5; }
+.hud { display: grid; grid-template-columns: 1.1fr .65fr 1fr 2fr; gap: 9px; }
+.hud > div, .mini-panel { min-width: 0; background: var(--panel); border: 2px solid var(--line); border-radius: 17px; }
+.hud > div { padding: 10px 13px; }
+.label { display: block; color: var(--muted); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
+.hud strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.progress-wrap { display: flex; flex-direction: column; justify-content: center; }
+.progress { height: 14px; margin-top: 6px; overflow: hidden; border-radius: 999px; background: #e6ebe7; }
+.progress > span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--accent); transition: width .12s linear; }
+.canvas-wrap { position: relative; overflow: hidden; border: 3px solid #b9c8c0; border-radius: 24px; background: #dff4ff; }
+canvas { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; touch-action: manipulation; }
+.overlay { position: absolute; inset: 14px auto auto 50%; max-width: 90%; transform: translateX(-50%); border-radius: 999px; background: #17352de8; color: white; padding: 9px 16px; text-align: center; font-weight: 900; box-shadow: 0 5px 18px #0002; }
+.reward-card { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 14px; width: min(420px, calc(100% - 24px)); padding: 18px; border: 3px solid #e6bd58; border-radius: 22px; background: #fff9dfed; box-shadow: 0 16px 45px #0003; }
+.reward-icon { display: grid; place-items: center; flex: 0 0 70px; width: 70px; height: 70px; border-radius: 18px; background: #fff0b7; font-size: 38px; }
+.reward-card span, .reward-card small { display: block; color: var(--muted); }
+.reward-card strong { display: block; margin: 2px 0; font-size: 22px; }
+.controls { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.controls button { min-height: 70px; border: 2px solid #cbd7d0; border-radius: 18px; background: var(--panel); color: var(--ink); font-weight: 900; touch-action: manipulation; user-select: none; }
+.controls button b { display: block; font-size: 25px; line-height: 1; }
+.controls button span { display: block; margin-top: 4px; font-size: 12px; }
+.controls .action { background: #fff3cf; border-color: #e7c979; }
+.controls button:active, .controls button.pressed { transform: translateY(2px); background: #e7f0eb; }
+.bottom-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; }
+.mini-panel { padding: 15px 16px; }
+.section-heading { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.mini-panel h2 { margin: 1px 0 8px; font-size: 17px; }
+.player-count { padding: 4px 9px; border-radius: 999px; background: #e9f2ed; font-size: 12px; font-weight: 900; }
+#standings { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 10px; }
+#standings li { min-width: 0; padding: 8px 9px; border-radius: 11px; background: var(--panel-soft); font-size: 13px; }
+#standings li.me { background: #e6f3ed; font-weight: 900; }
+#standings li.offline { opacity: .55; }
+.standing-row { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.place { width: 22px; font-weight: 900; }
+.pilot-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pilot-progress { color: var(--muted); font-variant-numeric: tabular-nums; }
+.next-reward { display: flex; gap: 11px; align-items: center; margin: 6px 0 7px; }
+.mini-reward-icon { display: grid; place-items: center; flex: 0 0 48px; width: 48px; height: 48px; border-radius: 13px; background: #fff0b7; font-size: 25px; }
+.reward-panel p { margin: 0; color: var(--muted); font-size: 13px; }
+.reward-panel small { color: var(--muted); }
+
+/* Garagem */
+.garage-panel { position: absolute; z-index: 20; top: 54px; right: 0; width: min(520px, 100%); padding: 18px; border: 2px solid var(--line); border-radius: 22px; background: #fffdf7f7; box-shadow: 0 24px 65px #0003; backdrop-filter: blur(8px); }
+.garage-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.garage-header h2 { margin: 0; font-size: 24px; }
+.close-button { width: 44px; height: 44px; border: 2px solid var(--line); border-radius: 13px; background: white; font-size: 25px; line-height: 1; }
+.garage-copy { margin: 9px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.bike-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.bike-card { min-width: 0; padding: 11px; border: 2px solid var(--line); border-radius: 15px; background: white; text-align: left; color: var(--ink); }
+.bike-card.selected { border-color: var(--accent); background: #eef7f2; }
+.bike-card.locked { background: #f2f2ee; color: #79877f; }
+.bike-card .bike-emoji { display: block; font-size: 31px; }
+.bike-card strong, .bike-card small { display: block; }
+.bike-card small { margin-top: 3px; color: var(--muted); font-size: 11px; }
+.equipment-strip { margin-top: 15px; padding-top: 12px; border-top: 1px solid var(--line); }
+.equipment-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.equipment-chip { padding: 6px 8px; border-radius: 999px; background: #f0efe7; font-size: 11px; font-weight: 800; }
+
+@media (max-width: 800px) {
+  .join-shell { grid-template-columns: 1fr; min-height: 0; margin-top: 8px; }
+  .hero-visual { min-height: 250px; }
+  .mountain { bottom: 31%; transform: scale(.75); transform-origin: bottom; }
+  .m2 { transform: scale(.62); }
+  .hero-bike { bottom: 14%; }
+  .join-card { padding: 28px; }
+  .hud { grid-template-columns: repeat(3, 1fr); }
+  .progress-wrap { grid-column: 1 / -1; }
+}
+@media (max-width: 680px) {
+  .page { padding: 8px; }
+  .topbar { align-items: flex-start; }
+  .brand-compact strong { display: none; }
+  .room-badge { display: none; }
+  .controls { gap: 6px; }
+  .controls button { min-height: 64px; }
+  .bottom-grid { grid-template-columns: 1fr; }
+  #standings { grid-template-columns: 1fr 1fr; }
+  .garage-panel { top: 50px; }
+}
+@media (max-width: 430px) {
+  .hud > div { padding: 8px; }
+  .hud strong { font-size: 13px; }
+  .controls button span { font-size: 10px; }
+  #standings { grid-template-columns: 1fr; }
+  .bike-grid { grid-template-columns: 1fr; }
+  .reward-card { padding: 13px; }
+  .reward-icon { flex-basis: 54px; width: 54px; height: 54px; font-size: 29px; }
+  .reward-card strong { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; animation-duration: .001ms !important; }
+}

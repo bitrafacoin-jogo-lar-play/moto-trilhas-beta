@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#315f43">
+  <meta name="description" content="Moto Trilhas: jogo infantil de moto com trilhas e multiplayer para até 4 jogadores.">
+  <title>Moto Trilhas</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="page">
+    <section id="joinPanel" class="join-shell" aria-labelledby="gameTitle">
+      <div class="hero-visual" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="mountain m1"></div>
+        <div class="mountain m2"></div>
+        <div class="trail"></div>
+        <div class="hero-bike">🏍️</div>
+      </div>
+      <div class="join-card">
+        <p class="eyebrow">AVENTURA MULTIPLAYER</p>
+        <h1 id="gameTitle">Moto Trilhas</h1>
+        <p class="lead">Corra por trilhas, desvie dos obstáculos, faça saltos e desbloqueie novas motos.</p>
+        <form id="joinForm" novalidate>
+          <label for="playerName">Nome do piloto</label>
+          <input id="playerName" name="playerName" maxlength="14" autocomplete="off" inputmode="text" placeholder="Ex.: Leo" required>
+          <button class="primary" type="submit">Jogar agora</button>
+          <p class="privacy-note">Sem cadastro, sem chat e sem voz. Até 4 pilotos por sala.</p>
+          <p id="joinMessage" class="message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="gamePanel" class="game-panel hidden" aria-label="Jogo Moto Trilhas">
+      <div class="topbar">
+        <div class="brand-compact"><span aria-hidden="true">🏍️</span><strong>Moto Trilhas</strong></div>
+        <div class="top-actions">
+          <span id="roomBadge" class="room-badge">Sala —</span>
+          <button id="garageBtn" class="icon-button" type="button" aria-expanded="false" aria-controls="garagePanel">Garagem</button>
+          <button id="soundBtn" class="icon-button" type="button" aria-pressed="false">Som: ligado</button>
+        </div>
+      </div>
+
+      <div class="hud">
+        <div><span class="label">Pista</span><strong id="trackName">Bosque Verde</strong></div>
+        <div><span class="label">Fase</span><strong id="phaseLabel">1</strong></div>
+        <div><span class="label">Moto</span><strong id="bikeLabel">Trilha 50</strong></div>
+        <div class="progress-wrap"><span class="label">Progresso</span><div class="progress" aria-hidden="true"><span id="progressBar"></span></div><strong id="progressText" class="sr-only">0%</strong></div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="gameCanvas" width="960" height="480" tabindex="0" aria-label="Pista de moto. Use os botões abaixo ou as setas do teclado."></canvas>
+        <div id="overlay" class="overlay" aria-live="polite">Aguardando pilotos…</div>
+        <div id="rewardCard" class="reward-card hidden" role="status" aria-live="polite">
+          <div class="reward-icon" id="rewardIcon">🎁</div>
+          <div>
+            <span>Nova recompensa</span>
+            <strong id="rewardUnlocked">Capacete Verde</strong>
+            <small id="rewardHint">Pronto para a próxima pista.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls" aria-label="Controles do jogo">
+        <button id="leftBtn" type="button" aria-label="Desviar para a esquerda"><b>◀</b><span>Esquerda</span></button>
+        <button id="jumpBtn" class="action" type="button" aria-label="Pular"><b>▲</b><span>Pular</span></button>
+        <button id="crouchBtn" class="action" type="button" aria-label="Abaixar"><b>▼</b><span>Abaixar</span></button>
+        <button id="rightBtn" type="button" aria-label="Desviar para a direita"><b>▶</b><span>Direita</span></button>
+      </div>
+
+      <div class="bottom-grid">
+        <section class="mini-panel">
+          <div class="section-heading">
+            <div>
+              <span class="label">Corrida atual</span>
+              <h2>Pilotos</h2>
+            </div>
+            <span id="playerCount" class="player-count">1/4</span>
+          </div>
+          <ol id="standings"></ol>
+        </section>
+        <section class="mini-panel reward-panel">
+          <span class="label">Próximo desbloqueio</span>
+          <div class="next-reward">
+            <div id="nextRewardIcon" class="mini-reward-icon">🪖</div>
+            <div>
+              <h2 id="rewardText">Capacete Verde</h2>
+              <p id="rewardDescription">Proteção para suas aventuras.</p>
+            </div>
+          </div>
+          <small>Seu progresso fica salvo neste navegador.</small>
+        </section>
+      </div>
+
+      <aside id="garagePanel" class="garage-panel hidden" aria-labelledby="garageTitle">
+        <div class="garage-header">
+          <div>
+            <span class="label">Sua coleção</span>
+            <h2 id="garageTitle">Garagem</h2>
+          </div>
+          <button id="garageCloseBtn" class="close-button" type="button" aria-label="Fechar garagem">×</button>
+        </div>
+        <p class="garage-copy">Escolha uma das motos já desbloqueadas. A troca é visual para manter a corrida justa.</p>
+        <div id="bikeGrid" class="bike-grid"></div>
+        <div class="equipment-strip">
+          <span class="label">Equipamentos conquistados</span>
+          <div id="equipmentList" class="equipment-list"></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/game.js" defer></script>
+</body>
+</html>
